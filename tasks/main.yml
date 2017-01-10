@@ -38,8 +38,40 @@
 - name: install make
   apt: name=make state=present
 
+- name: install autoconf
+  apt: name=autoconf state=present
+
+- name: install libyaml-dev
+  apt: name=libyaml-dev state=present
+
+- name: install libpng16-dev
+  apt: name=libpng16-dev state=present
+
+- name: install libpq-dev
+  apt: name=libpq-dev state=present
+
+- name: install libc-client-dev
+  apt: name=libc-client-dev state=present
+
+- name: install libkrb5-dev
+  apt: name=libkrb5-dev state=present
+
 - name: create a PHP environment with phpbrew
   shell: PHPBREW_ROOT=/opt/phpbrew PHPBREW_HOME=/opt/phpbrew phpbrew install {{ phpbrew_php_version }} {{ phpbrew_php_variants }} creates="/opt/phpbrew/php/php-{{ phpbrew_php_version }}/bin/php"
+
+- name: install PHP extensions
+  shell: bash -c "export PHPBREW_ROOT=/opt/phpbrew && export PHPBREW_HOME=/opt/phpbrew && source /root/.phpbrew/bashrc && phpbrew switch php-{{ phpbrew_php_version }} && phpbrew ext install {{ item.name }}" creates="/opt/phpbrew/php/php-{{ phpbrew_php_version }}/var/db/{{ item.config }}"
+  with_items:
+    - { name: yaml, config: "yaml.ini" }
+    - { name: gd, config: "gd.ini" }
+      #- { name: imap, config: "imap.ini" }
+    - { name: pdo_pgsql, config: "pdo_pgsql.ini" }
+    - { name: "raphf 1.1.0", config: "raphf.ini" }
+    - { name: "propro 1.0.0", config: "propro.ini" }
+    - { name: "pecl_http 2.5.5", config: "http.ini" }
+    - { name: "github:phalcon/cphalcon", config: "phalcon.ini" }
+    - { name: rar, config: "rar.ini" }
+    - { name: shmop, config: "shmop.ini" }
 
 - name: put php-fpm.conf
   template: src=php-fpm.conf dest="/opt/phpbrew/php/php-{{ phpbrew_php_version }}/etc/php-fpm.conf"
