@@ -3,6 +3,7 @@ Description=php-fpm {{ phpbrew_php_version }} Service
 Documentation=https://github.com/gitinsky/ansible-role-phpbrew
 
 [Service]
+Type=forking
 User=root
 Group=root
 ExecStart=/opt/phpbrew/php/php-5.5.30/sbin/php-fpm -y /opt/phpbrew/php/php-{{ phpbrew_php_version }}/etc/php-fpm.conf
