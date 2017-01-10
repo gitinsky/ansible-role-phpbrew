@@ -44,6 +44,7 @@
 - name: put php-fpm.conf
   template: src=php-fpm.conf dest="/opt/phpbrew/php/php-{{ phpbrew_php_version }}/etc/php-fpm.conf"
   when: "phpbrew_enable_php_fpm_service"
+  notify: "restart php-fpm"
 
 - name: put php-fpm unit file
   template: src=php-fpm.service dest="/etc/systemd/system/php-fpm{{ phpbrew_php_version | regex_replace('\\.', '_') }}.service" owner=root group=root mode=0644

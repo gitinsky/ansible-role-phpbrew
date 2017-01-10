@@ -1,3 +1,12 @@
 phpbrew_php_version: 5.5.30
 phpbrew_php_variants: "+bcmath+bz2+calendar+ctype+curl+dba+dom+exif+fileinfo+filter+fpm+gettext+hash+iconv+icu+imap+intl+json+mbstring+mcrypt+mhash+mysql+openssl+pcre+pcntl+pdo+phar+posix+session+soap+sockets+tokenizer+wddx+xml+xml_all+zip+zlib"
 phpbrew_enable_php_fpm_service: False
+phpbrew_php_fpm_listen: "/opt/phpbrew/php/php-{{ phpbrew_php_version }}/var/run/php-fpm.sock"
+phpbrew_php_fpm_user: www-data
+phpbrew_php_fpm_group: www-data
+phpbrew_php_fpm_pm_max_children: 5
+phpbrew_php_fpm_pm_max_requests: 0
+phpbrew_php_fpm_pm_status_path: "/phpbrew_php_fpm_pm_status_path"
+phpbrew_php_fpm_request_slowlog_timeout: 0
+phpbrew_php_fpm_request_terminate_timeout: 0
+phpbrew_php_fpm_request_slowlog: "/opt/phpbrew/php/php-{{ phpbrew_php_version }}/var/log/$pool.log.slow"
