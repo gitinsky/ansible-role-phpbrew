@@ -1,0 +1,42 @@
+---
+- name: checkout phpbrew
+  git: repo=https://github.com/phpbrew/phpbrew.git dest=/opt/phpbrew-bin
+
+- name: make a link to phpbrew
+  file: state=link src=/opt/phpbrew-bin/phpbrew dest=/usr/bin/phpbrew
+
+- name: install PHP CLI interpreter
+  apt: name=php-cli state=present
+
+- name: create phpbrew root
+  file: state=directory dest=/opt/phpbrew
+
+- name: run phpbrew init
+  shell: phpbrew init --root=/opt/phpbrew
+
+- name: install gcc
+  apt: name=gcc state=present
+
+- name: install libxml2-dev
+  apt: name=libxml2-dev state=present
+
+- name: install libssl-dev
+  apt: name=libssl-dev state=present
+
+- name: install libbz2-dev
+  apt: name=libbz2-dev state=present
+
+- name: install g++
+  apt: name=g++ state=present
+
+- name: install mcrypt
+  apt: name=libmcrypt-dev state=present
+
+- name: install libxslt1-dev
+  apt: name=libxslt1-dev state=present
+
+- name: install make
+  apt: name=make state=present
+
+- name: create a PHP environment with phpbrew
+  shell: PHPBREW_ROOT=/opt/phpbrew PHPBREW_HOME=/opt/phpbrew phpbrew install {{ phpbrew_php_version }} {{ phpbrew_php_variants }} creates="/opt/phpbrew/php/php-{{ phpbrew_php_version }}/bin/php"
