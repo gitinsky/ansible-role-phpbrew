@@ -1,0 +1,14 @@
+[Unit]
+Description=php-fpm {{ phpbrew_php_version }} Service
+Documentation=https://github.com/gitinsky/ansible-role-phpbrew
+
+[Service]
+User=root
+Group=root
+ExecStart=/opt/phpbrew/php/php-5.5.30/sbin/php-fpm -y /opt/phpbrew/php/php-{{ phpbrew_php_version }}/etc/php-fpm.conf
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+Alias=php-fpm{{ phpbrew_php_version | regex_replace('\\.', '_') }}.service
