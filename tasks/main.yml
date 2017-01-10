@@ -56,6 +56,9 @@
 - name: install libkrb5-dev
   apt: name=libkrb5-dev state=present
 
+- name: install libcurl4-openssl-dev
+  apt: name=libcurl4-openssl-dev state=present
+
 - name: create a PHP environment with phpbrew
   shell: PHPBREW_ROOT=/opt/phpbrew PHPBREW_HOME=/opt/phpbrew phpbrew install {{ phpbrew_php_version }} {{ phpbrew_php_variants }} creates="/opt/phpbrew/php/php-{{ phpbrew_php_version }}/bin/php"
 
@@ -64,6 +67,7 @@
   with_items:
     - { name: yaml, config: "yaml.ini" }
     - { name: gd, config: "gd.ini" }
+    - { name: curl, config: "curl.ini" }
       #- { name: imap, config: "imap.ini" }
     - { name: pdo_pgsql, config: "pdo_pgsql.ini" }
     - { name: "raphf 1.1.0", config: "raphf.ini" }
