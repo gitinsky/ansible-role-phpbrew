@@ -73,7 +73,7 @@
     - { name: "raphf 1.1.0", config: "raphf.ini" }
     - { name: "propro 1.0.0", config: "propro.ini" }
     - { name: "pecl_http 2.5.5", config: "http.ini" }
-    - { name: "github:phalcon/cphalcon", config: "phalcon.ini" }
+    - { name: "github:phalcon/cphalcon phalcon-v2.0.9", config: "phalcon.ini" }
     - { name: rar, config: "rar.ini" }
     - { name: shmop, config: "shmop.ini" }
 
