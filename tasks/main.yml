@@ -76,6 +76,7 @@
     - { name: "github:phalcon/cphalcon phalcon-v2.0.9", config: "phalcon.ini" }
     - { name: rar, config: "rar.ini" }
     - { name: shmop, config: "shmop.ini" }
+  notify: "restart php-fpm"
 
 - name: put php-fpm.conf
   template: src=php-fpm.conf dest="/opt/phpbrew/php/php-{{ phpbrew_php_version }}/etc/php-fpm.conf"
